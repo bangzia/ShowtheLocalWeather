@@ -1,0 +1,27 @@
+body {
+  background-color: #414d5e;
+  color: white;
+}
+
+.container {
+  margin: auto auto auto auto;
+}
+
+#city {
+  font-size: 1em;
+  font-weight: 500;
+ text-transform: uppercase;
+}
+
+#weatherIcon {
+  /*font-size: 6em;*/
+}
+#description {
+  /*text-transform: uppercase;*/
+}
+#temp {
+  font-size: 2em;
+}
+#units {
+  font-size: 2em;
+}
