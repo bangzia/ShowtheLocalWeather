@@ -5,7 +5,7 @@ document.onreadystatechange = function () {
     // check the value - if it's 'interactive' then the DOM has loaded
     if (document.readyState === "interactive") {
         // add code here
-         requestLocation("http://ip-api.com/json/");
+         requestLocation("https://ip-api.com/json/");
     }
 }
 /*var newQuote = document.getElementById("newQuote");
