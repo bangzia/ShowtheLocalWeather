@@ -1,7 +1,5 @@
 // listen for changes to document.readyState - onreadystatechange is
 // fired when readyState value is changed
-const locationUrl =
-  "http://api.ipstack.com/check?access_key=b7350433b2c3829cae1fcb8d680db78f";
 getWeather();
 
 async function getWeather() {
@@ -21,7 +19,7 @@ async function getWeather() {
 async function getWeatherData(lat, lon) {
   try {
     const weatherResponse = await fetch(
-      `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=315add96e2132c518fd8a742ae96e1e1`
+      `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=315add96e2132c518fd8a742ae96e1e1`
     );
     const weatherData = await weatherResponse.json();
     document.getElementById("city").innerHTML = weatherData.name;
