@@ -28,7 +28,7 @@ async function getWeatherData(lat, lon) {
     console.log(weatherData);
     document.getElementById(
       "weatherIcon"
-    ).innerHTML = `<img src=" http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png" alt="weather icon"/>`;
+    ).innerHTML = `<img src=" https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png" alt="weather icon"/>`;
     document.getElementById("temp").innerHTML = weatherData.main.temp;
   } catch (e) {
     console.error(e);
