@@ -1,38 +1,38 @@
 // listen for changes to document.readyState - onreadystatechange is
 // fired when readyState value is changed
-document.onreadystatechange = function () {
+const locationUrl =
+  "http://api.ipstack.com/check?access_key=b7350433b2c3829cae1fcb8d680db78f";
+getWeather();
 
-    // check the value - if it's 'interactive' then the DOM has loaded
-    if (document.readyState === "interactive") {
-        // add code here
-         requestLocation("https://ip-api.com/json/");
+async function getWeather() {
+  try {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        getWeatherData(position.coords.latitude, position.coords.longitude);
+      });
+    } else {
+      document.getElementById("root").innerHTML =
+        "la géolocalisation n'est pas disponible";
     }
-}
-/*var newQuote = document.getElementById("newQuote");
-var tweetQuote = document.getElementById("tweetQuote");
-newQuote.addEventListener("click", function() {
-  request("https://andruxnet-random-famous-quotes.p.mashape.com/?cat=famous&count=1")
-}, false);
-tweetQuote.addEventListener("click", tweet, false);*/
-
-function requestLocation(url) {
-  var xhr = new XMLHttpRequest();
-  xhr.onreadystatechange = function() {
-    if(xhr.readyState === 4 && xhr.status === 200) {
-      var json = JSON.parse(xhr.response)
-      document.getElementById("city").innerHTML = json.city;
-    }
+  } catch (e) {
+    console.error(e);
   }
-  xhr.open("POST", url, true);
-  // xhr.setRequestHeader("X-Mashape-Key", "1tqLeS2Vq4mshrS0okC6Age43ouGp1Uib8mjsnxss2SUIzBAzq");
-  xhr.send();
 }
-
-/*function tweet() {
-  var quote = document.getElementById("quote").innerText;
-  var author = document.getElementById("author").innerText;
-  var tweetUrl = 'https://twitter.com/intent/tweet?text=' + '"' + encodeURIComponent(quote) + '" ' + encodeURIComponent(author) + '.';
-  var strWindowFeatures = "scrollbars=yes,resizable=yes,toolbar=no,location=yes,width=550,height=420";
-  window.open(tweetUrl, "tweet du quote", strWindowFeatures);
+async function getWeatherData(lat, lon) {
+  try {
+    const weatherResponse = await fetch(
+      `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=315add96e2132c518fd8a742ae96e1e1`
+    );
+    const weatherData = await weatherResponse.json();
+    document.getElementById("city").innerHTML = weatherData.name;
+    document.getElementById("description").innerHTML =
+      weatherData.weather[0].main;
+    console.log(weatherData);
+    document.getElementById(
+      "weatherIcon"
+    ).innerHTML = `<img src=" http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png" alt="weather icon"/>`;
+    document.getElementById("temp").innerHTML = weatherData.main.temp;
+  } catch (e) {
+    console.error(e);
+  }
 }
-*/
